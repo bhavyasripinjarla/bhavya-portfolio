@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinjarla Bhavya Sri | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-accent: #8b5cf6;
+            --secondary-accent: #3b82f6;
+            --gradient-text: linear-gradient(135deg, #a78bfa, #60a5fa);
+            --gradient-bg: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --bg-main: #0f172a;
+            --nav-height: 76px;
+        }
+
+        [data-bs-theme="light"] {
+            --primary-accent: #7c3aed;
+            --secondary-accent: #2563eb;
+            --gradient-text: linear-gradient(135deg, #7c3aed, #2563eb);
+            --gradient-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(37, 99, 235, 0.05));
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --card-bg: #ffffff;
+            --card-hover: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --bg-main: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: var(--bg-main);
+            overflow: hidden;
+        }
+
+        .ambient-blob {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--primary-accent);
+        }
+
+        .blob-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--secondary-accent);
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(5%, 5%) scale(1.1);
+            }
+        }
+
+        /* Typography & Utilities */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .text-gradient {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .text-muted-custom {
+            color: var(--text-muted) !important;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* Glassmorphism Navbar */
+        .navbar-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            height: var(--nav-height);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-main);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary-accent);
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background: var(--gradient-text);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            color: #fff;
+        }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--primary-accent);
+            padding: 10px 26px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary-accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--nav-height);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            height: 40px;
+            /* Prevent layout shift during typing */
+        }
+
+        .typed-cursor {
+            color: var(--primary-accent);
+        }
+
+        /* Cards & Containers */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            background: var(--card-hover);
+            border-color: var(--primary-accent);
+        }
+
+        /* Skills */
+        .skill-badge {
+            background: var(--gradient-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-accent);
+        }
+
+        .skill-badge i {
+            color: var(--primary-accent);
+            font-size: 1.2rem;
+        }
+
+        /* Project Cards */
+        .project-img-wrapper {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+            background: var(--gradient-bg);
+        }
+
+        .project-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .glass-card:hover .project-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .tech-tags span {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--bg-main);
+            border: 1px solid var(--glass-border);
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            color: var(--text-muted);
+        }
+
+        /* Timeline (Experience) */
+        .timeline {
+            border-left: 2px solid var(--glass-border);
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-accent);
+            border: 3px solid var(--bg-main);
+        }
+
+        /* Modal Customization */
+        .modal-content {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+        }
+
+        .modal-header {
+            border-bottom-color: var(--glass-border);
+        }
+
+        .modal-footer {
+            border-top-color: var(--glass-border);
+        }
+
+        .modal-title {
+            font-weight: 700;
+        }
+
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        [data-bs-theme="light"] .btn-close {
+            filter: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--card-hover);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-accent);
+        }
+
+        /* Helper for images in modals */
+        .placeholder-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-glass">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="#">PINJARLA BHAVYA SRI</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars text-main"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-3">
+                        <button id="darkModeToggle"
+                            class="btn btn-outline-custom rounded-circle p-2 d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
+                            <i class="fas fa-sun" id="themeIcon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container text-center text-lg-start">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-7 text-center text-lg-start mt-5 mt-lg-0" data-aos="fade-right">
+                    <p class="text-primary-accent fw-medium mb-2"><i class="fa-solid fa-code"></i> Hello World, I am</p>
+                    <h1 class="display-3 fw-bold mb-3">Pinjarla <span class="text-gradient">Bhavya Sri</span></h1>
+                    <div class="hero-subtitle">
+                        <span id="typed"></span>
+                    </div>
+                    <p class="text-muted-custom mb-5 lead max-w-75 mx-auto mx-lg-0">
+                        Passionate about solving real-world problems and building applications. Currently a B.Tech
+                        student with a strong foundation in core computer science.
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#projects" class="btn btn-primary-custom">View My Work</a>
+                        <a href="./RESUME.pdf" download class="btn btn-outline-custom"><i class="fas fa-download me-2"></i>Resume</a>
+                    </div>
+
+                    <div class="mt-5 d-flex gap-4 justify-content-center justify-content-lg-start">
+                        <a href="https://github.com/bhavyasripinjarla" target="_blank"
+                            class="text-muted-custom fs-4 hover-primary"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/pinjarla-bhavya-sri" target="_blank"
+                            class="text-muted-custom fs-4 hover-primary"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://leetcode.com/u/bhavyasripinjarla/" target="_blank"
+                            class="text-muted-custom fs-4 hover-primary"><i class="fas fa-code"></i></a>
+                        <a href="https://www.geeksforgeeks.org/profile/bhavyasri04" target="_blank"
+                            class="text-muted-custom fs-4 hover-primary"><i class="fas fa-laptop-code"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center" data-aos="fade-left" data-aos-delay="200">
+                    <div class="position-relative d-inline-block">
+                        <!-- Decorative background blob for the image -->
+                        <div class="position-absolute top-50 start-50 translate-middle rounded-circle"
+                            style="width: 105%; height: 105%; background: var(--gradient-bg); z-index: -1;"></div>
+                        <img src="./PROFILE.png" alt="Pinjarla Bhavya Sri"
+                            class="img-fluid rounded-circle border border-4 border-secondary-accent shadow-lg"
+                            style="width: 320px; height: 320px; object-fit: cover; border-color: var(--primary-accent) !important;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-6 fw-bold">About <span class="text-gradient">Me</span></h2>
+                    <div class="mx-auto mt-2"
+                        style="width: 60px; height: 4px; background: var(--gradient-text); border-radius: 2px;"></div>
+                </div>
+            </div>
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="glass-card h-100">
+                        <h3 class="h4 mb-3">My Journey</h3>
+                        <p class="text-muted-custom lh-lg">
+                            I am a Computer Science student (2023–2027) with a strong foundation in Data Structures and
+                            Algorithms, Operating Systems, Computer Networks, and DBMS.
+                        </p>
+                        <p class="text-muted-custom lh-lg">
+                            My academic journey is complemented by practical experience gained through internships at
+                            IIT Tirupati and ISEA. I am deeply passionate about building real-world applications,
+                            exploring IoT, cybersecurity, and software engineering.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card h-100">
+                        <h3 class="h4 mb-4"><i class="fas fa-graduation-cap me-2 text-primary-accent"></i>Education</h3>
+                        <div class="mb-4">
+                            <h5 class="mb-1">B.Tech in Computer Science</h5>
+                            <p class="text-muted-custom mb-1">2023 – 2027</p>
+                            <p class="fw-bold text-gradient mb-0">CGPA: 9.2</p>
+                        </div>
+                        <hr class="border-secondary opacity-25">
+                        <h3 class="h4 mb-3 mt-4"><i
+                                class="fas fa-certificate me-2 text-primary-accent"></i>Certifications</h3>
+                        <ul class="list-unstyled text-muted-custom">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>NSE 4 Fortinet</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Cisco Python (PCAP)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding">
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-6 fw-bold">Technical <span class="text-gradient">Skills</span></h2>
+                    <div class="mx-auto mt-2"
+                        style="width: 60px; height: 4px; background: var(--gradient-text); border-radius: 2px;"></div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card text-center h-100">
+                        <i class="fas fa-code fa-3x mb-4 text-gradient"
+                            style="background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                        <h4 class="mb-4">Languages</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="fab fa-java"></i> Java</span>
+                            <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="skill-badge"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="skill-badge"><i class="fas fa-database"></i> SQL</span>
+                            <span class="skill-badge"><i class="fab fa-html5"></i> HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card text-center h-100">
+                        <i class="fas fa-tools fa-3x mb-4 text-gradient"
+                            style="background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                        <h4 class="mb-4">Tools & Platforms</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="skill-badge"><i class="fab fa-github"></i> GitHub</span>
+                            <span class="skill-badge"><i class="fab fa-linux"></i> Linux</span>
+                            <span class="skill-badge"><i class="fas fa-code-branch"></i> VS Code</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card text-center h-100">
+                        <i class="fas fa-brain fa-3x mb-4 text-gradient"
+                            style="background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                        <h4 class="mb-4">Core Concepts</h4>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <span class="skill-badge"><i class="fas fa-project-diagram"></i> DSA</span>
+                            <span class="skill-badge"><i class="fas fa-microchip"></i> OS</span>
+                            <span class="skill-badge"><i class="fas fa-network-wired"></i> CN</span>
+                            <span class="skill-badge"><i class="fas fa-server"></i> DBMS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding">
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-6 fw-bold">Featured <span class="text-gradient">Projects</span></h2>
+                    <div class="mx-auto mt-2"
+                        style="width: 60px; height: 4px; background: var(--gradient-text); border-radius: 2px;"></div>
+                </div>
+            </div>
+            <div class="row g-4">
+
+                <!-- Project 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card h-100 d-flex flex-column">
+                        <div class="project-img-wrapper d-flex align-items-center justify-content-center">
+                            <img src="./output_parking.png" alt="Smart Parking Detection">
+                        </div>
+                        <h4 class="mb-2">Smart Parking Detection</h4>
+                        <p class="text-muted-custom flex-grow-1">Detects parking slot occupancy using deep learning
+                            (YOLOv5) and computer vision techniques.</p>
+                        <div class="tech-tags mb-3">
+                            <span>Python</span><span>OpenCV</span><span>YOLOv5</span>
+                        </div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-outline-custom btn-sm flex-grow-1" data-bs-toggle="modal"
+                                data-bs-target="#modalProj1">
+                                <i class="fas fa-info-circle me-1"></i> Details
+                            </button>
+                            <a href="https://github.com/bhavyasripinjarla/Smart-Parking-Detection" target="_blank"
+                                class="btn btn-outline-custom btn-sm"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card h-100 d-flex flex-column">
+                        <div class="project-img-wrapper d-flex align-items-center justify-content-center">
+                            <img src="./watch_display.png" alt="AirGuard Wearable">
+                        </div>
+                        <h4 class="mb-2">AirGuard Wearable</h4>
+                        <p class="text-muted-custom flex-grow-1">IoT-based smart wearable that monitors real-time air
+                            quality and health parameters.</p>
+                        <div class="tech-tags mb-3">
+                            <span>ESP32</span><span>IoT</span><span>Sensors</span>
+                        </div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-outline-custom btn-sm flex-grow-1" data-bs-toggle="modal"
+                                data-bs-target="#modalProj2">
+                                <i class="fas fa-info-circle me-1"></i> Details
+                            </button>
+                            <a href="https://github.com/bhavyasripinjarla/AirGuard-Wearable" target="_blank"
+                                class="btn btn-outline-custom btn-sm"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card h-100 d-flex flex-column">
+                        <div class="project-img-wrapper d-flex align-items-center justify-content-center">
+                            <img src="./dashboard.png" alt="SmartSecureNet">
+                        </div>
+                        <h4 class="mb-2">SmartSecureNet</h4>
+                        <p class="text-muted-custom flex-grow-1">AI-based system that detects unsafe public Wi-Fi using
+                            machine learning and real-time monitoring.</p>
+                        <div class="tech-tags mb-3">
+                            <span>Python</span><span>Flask</span><span>Kotlin</span><span>ML</span>
+                        </div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-outline-custom btn-sm flex-grow-1" data-bs-toggle="modal"
+                                data-bs-target="#modalProj3">
+                                <i class="fas fa-info-circle me-1"></i> Details
+                            </button>
+                            <a href="https://github.com/bhavyasripinjarla/SmartSecureNet-Tool" target="_blank"
+                                class="btn btn-outline-custom btn-sm"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-6 fw-bold">Internship <span class="text-gradient">Experience</span></h2>
+                    <div class="mx-auto mt-2"
+                        style="width: 60px; height: 4px; background: var(--gradient-text); border-radius: 2px;"></div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline">
+
+                        <!-- Experience 1 -->
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="glass-card p-4">
+                                <h4 class="mb-1 text-gradient">Internship at PNT Lab</h4>
+                                <h6 class="text-muted-custom mb-3">Geo-Intel Lab at IITTNiF (IIT Tirupati)</h6>
+                                <p class="text-muted-custom mb-3">
+                                    Developed "AirGuard", an IoT-based smart wearable system focused on real-time
+                                    environmental and health monitoring using ESP32-S3, BME680, and MAX30102 sensors.
+                                    Designed a 3D-printed enclosure and smartwatch UI.
+                                </p>
+                                <div class="tech-tags">
+                                    <span>IoT</span><span>Embedded Systems</span><span>Hardware Prototyping</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Experience 2 -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="glass-card p-4">
+                                <h4 class="mb-1 text-gradient">Cybersecurity Intern</h4>
+                                <h6 class="text-muted-custom mb-3">ISEA — Andhra University (Dec 2025 - Mar 2026)</h6>
+                                <p class="text-muted-custom mb-3">
+                                    Selected for the Gov. of India initiative. Learned networking fundamentals,
+                                    performed network traffic analysis using Wireshark, identified indicators of
+                                    insecure networks, and completed a vulnerability assessment project.
+                                </p>
+                                <div class="tech-tags">
+                                    <span>Wireshark</span><span>Network
+                                        Analysis</span><span>TCP/IP</span><span>Cybersecurity</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-6 fw-bold">Get In <span class="text-gradient">Touch</span></h2>
+                    <div class="mx-auto mt-2"
+                        style="width: 60px; height: 4px; background: var(--gradient-text); border-radius: 2px;"></div>
+                    <p class="text-muted-custom mt-3">Feel free to reach out for collaborations or just a friendly
+                        hello!</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="glass-card text-center">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <i class="fas fa-envelope fa-2x text-primary-accent mb-3"></i>
+                                <h5>Email</h5>
+                                <a href="mailto:bhavyasreepinjarla@gmail.com"
+                                    class="text-muted-custom text-decoration-none hover-primary">bhavyasreepinjarla@gmail.com</a>
+                            </div>
+                            <div class="col-md-6">
+                                <i class="fas fa-phone-alt fa-2x text-primary-accent mb-3"></i>
+                                <h5>Phone</h5>
+                                <a href="tel:+919390582853"
+                                    class="text-muted-custom text-decoration-none hover-primary">+91 9390582853</a>
+                            </div>
+                        </div>
+                        <hr class="border-secondary opacity-25 my-4">
+                        <div class="d-flex justify-content-center gap-4">
+                            <a href="https://linkedin.com/in/pinjarla-bhavya-sri"
+                                class="btn btn-outline-custom rounded-circle p-0 d-flex align-items-center justify-content-center"
+                                style="width: 50px; height: 50px;"><i class="fab fa-linkedin-in fs-5"></i></a>
+                            <a href="https://github.com/bhavyasripinjarla"
+                                class="btn btn-outline-custom rounded-circle p-0 d-flex align-items-center justify-content-center"
+                                style="width: 50px; height: 50px;"><i class="fab fa-github fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 glass-card rounded-0 border-start-0 border-end-0 border-bottom-0 mt-5">
+        <div class="container">
+            <p class="mb-0 text-muted-custom">© 2026 Pinjarla Bhavya Sri. Built with HTML, CSS & JS.</p>
+        </div>
+    </footer>
+
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Modal 1: Smart Parking -->
+    <div class="modal fade" id="modalProj1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Smart Parking Detection using YOLOv5</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This project detects parking slot occupancy using a combination of deep learning and computer
+                        vision techniques. A YOLOv5 model is used to detect vehicles in an image or video feed, and
+                        predefined parking slot coordinates are used to determine whether each slot is occupied or
+                        available. The system outputs a visual representation along with a CSV report of parking status.
+                    </p>
+                    <p>The solution improves reliability compared to traditional contour-based methods by leveraging
+                        object detection and spatial overlap logic.</p>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Features</h6>
+                    <ul>
+                        <li>Detects cars, bikes, buses, trucks</li>
+                        <li>Determines occupied vs free slots</li>
+                        <li>Works on image or video</li>
+                        <li>Exports CSV report</li>
+                        <li>Visual overlay with real-time bounding boxes</li>
+                    </ul>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Tech Stack</h6>
+                    <div class="tech-tags">
+                        <span>Python</span><span>OpenCV</span><span>YOLOv5
+                            (PyTorch)</span><span>NumPy</span><span>Pandas</span><span>cvzone</span>
+                    </div>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Screenshots</h6>
+                    <p class="text-muted-custom small mb-2"><i class="fas fa-image"></i> Input &
+                        Output images (🔴 Occupied slots, 🟢 Free slots, 🔵 Vehicle detection boxes).</p>
+                    <img src="./input_parking.png" class="placeholder-img" alt="Input">
+                    <img src="./output_parking.png" class="placeholder-img" alt="Output">
+                </div>
+                <div class="modal-footer">
+                    <a href="https://github.com/bhavyasripinjarla/Smart-Parking-Detection" target="_blank"
+                        class="btn btn-primary-custom"><i class="fab fa-github me-2"></i>View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: AirGuard -->
+    <div class="modal fade" id="modalProj2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">AirGuard: IoT Smart Wearable</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="fw-bold text-gradient">An all-in-one smart wearable solution combining environmental
+                        awareness and health monitoring.</p>
+                    <p>AirGuard is an IoT-based smart wearable device designed to monitor both environmental and health
+                        parameters in real time. It integrates air quality sensing with health monitoring features into
+                        a compact smartwatch-like prototype, enabling users to stay aware of their surroundings and
+                        physical condition.</p>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Key Features</h6>
+                    <ul>
+                        <li>Real-Time Air Quality Index (AQI) Monitoring</li>
+                        <li>Heart Rate & Oxygen Level (SpO₂) Tracking</li>
+                        <li>Time, Battery, WiFi & Bluetooth Status</li>
+                        <li>Music Control & Activity Tracking</li>
+                        <li>Smartwatch UI with Real-Time Updates</li>
+                    </ul>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Architecture</h6>
+                    <p class="text-muted-custom">The system uses ESP32-S3 as the central controller. Environmental data
+                        is collected using the BME680 sensor, and health data is captured using the MAX30102 sensor. The
+                        ESP32 processes the data and displays it on the smartwatch interface in real time.</p>
+                    <img src="./architecture_watch.png" class="placeholder-img" alt="Architecture">
+
+                    <h6 class="mt-4 text-gradient fw-bold">Hardware Prototype</h6>
+                    <ul>
+                        <li>Compact smartwatch prototype with 3D-printed enclosure</li>
+                        <li>Magnetic charging mechanism</li>
+                    </ul>
+                    <img src="./hardware.png" class="placeholder-img" alt="Hardware">
+
+                    <h6 class="mt-4 text-gradient fw-bold">User Interface & Results</h6>
+                    <p class="text-muted-custom mb-2">Real-time AQI, heart rate, and SpO₂ visualization with clean
+                        circular UI design.</p>
+                    <img src="./watch_display.png" class="placeholder-img" alt="UI">
+
+                    <h6 class="mt-4 text-gradient fw-bold">Tech Stack</h6>
+                    <div class="tech-tags">
+                        <span>ESP32-S3</span><span>BME680</span><span>MAX30102</span><span>LVGL</span><span>3D
+                            Printing</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://github.com/bhavyasripinjarla/AirGuard-Wearable" target="_blank"
+                        class="btn btn-primary-custom"><i class="fab fa-github me-2"></i>View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: SmartSecureNet -->
+    <div class="modal fade" id="modalProj3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">SmartSecureNet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>SmartSecureNet is an AI-powered system designed to analyze public Wi-Fi security and detect
+                        malicious networks. It combines mobile-based Wi-Fi analysis with desktop-level network
+                        monitoring to provide real-time threat detection.</p>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Key Features</h6>
+                    <ul>
+                        <li>Wi-Fi Network Scanning & Encryption type detection</li>
+                        <li>AI-Based Security Risk Analysis & Evil Twin Detection</li>
+                        <li>Real-Time Packet Monitoring (Captures network packets, detects ARP/DNS attacks)</li>
+                        <li>Security Score System & Interactive Dashboard</li>
+                    </ul>
+
+                    <h6 class="mt-4 text-gradient fw-bold">Architecture</h6>
+                    <p class="text-muted-custom">The system consists of a mobile app for Wi-Fi scanning and a desktop
+                        system for real-time traffic monitoring. Data is processed using machine learning (Random Forest
+                        on CICIDS2017) to detect threats.</p>
+                    <img src="./architecture.png" class="placeholder-img" alt="Architecture">
+
+                    <h6 class="mt-4 text-gradient fw-bold">Mobile Application</h6>
+                    <img src="./mobile_dashboard.png" class="placeholder-img" alt="Mobile">
+
+                    <h6 class="mt-4 text-gradient fw-bold">Desktop Dashboard</h6>
+                    <img src="./dashboard.png" class="placeholder-img" alt="Dashboard">
+
+                    <h6 class="mt-4 text-gradient fw-bold">Tech Stack</h6>
+                    <div class="tech-tags">
+                        <span>Kotlin</span><span>Flask</span><span>Scikit-learn</span><span>Scapy</span><span>PyShark</span><span>HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://github.com/bhavyasripinjarla/SmartSecureNet-Tool" target="_blank"
+                        class="btn btn-primary-custom"><i class="fab fa-github me-2"></i>View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Typed JS -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script>
+        // Initialize AOS Animation
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize Typed.js
+        var options = {
+            strings: ["Computer Science Student", "Aspiring Software Engineer", "IoT & Security Enthusiast"],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
+        };
+        var typed = new Typed("#typed", options);
+
+        // Dark/Light Mode Toggle
+        const toggleBtn = document.getElementById('darkModeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        // Check local storage for theme preference
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-bs-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar-glass');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'var(--glass-bg)';
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'var(--glass-bg)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
